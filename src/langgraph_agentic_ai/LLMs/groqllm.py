@@ -10,12 +10,14 @@ class GroqLLM:
         try:
             groq_api_key = self.user_controls_input.get('GROQ_API_KEY')
             selected_groq_model = self.user_controls_input.get('selected_groq_model')
-            if groq_api_key == ' ' and os.environ.get('GROQ_API_KEY') == ' ':
+            
+            if not groq_api_key and not os.environ.get('GROQ_API_KEY'):
                 st.error("🚨 GROQ API Key is missing! Please provide the Groq API key.")
+                return None
                 
-            llm= ChatGroq(api_key=groq_api_key, model=selected_groq_model)
+            llm = ChatGroq(api_key=groq_api_key, model=selected_groq_model)
             
         except Exception as e:
-            raise valueError(f"Error occurred with exception : {e}")
+            raise ValueError(f"Error occurred with exception : {e}")
         
         return llm

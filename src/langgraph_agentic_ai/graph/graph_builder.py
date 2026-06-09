@@ -1,4 +1,4 @@
-from langgraph.graph import StateGaph
+from langgraph.graph import StateGraph
 from src.langgraph_agentic_ai.state.state import State
 from langgraph.graph import START, END
 from src.langgraph_agentic_ai.nodes.basic_chatbot_node import BasicChatbotNode
@@ -6,7 +6,7 @@ from src.langgraph_agentic_ai.nodes.basic_chatbot_node import BasicChatbotNode
 class GraphBuilder: 
     def __init__(self, model):
         self.llm = model
-        self.graph_builder= StateGaph(State)
+        self.graph_builder= StateGraph(State)
         
         
     def basic_chatbot_build_graph(self):
@@ -14,7 +14,7 @@ class GraphBuilder:
         It defines the structure of the graph and how messages are processed.
         
         Returns:
-            StateGaph: An instance of the StateGraph class representing the chatbot graph.
+            StateGraph: An instance of the StateGraph class representing the chatbot graph.
         """
         self.basic_chatbot_node= BasicChatbotNode(self.llm)
         
@@ -27,7 +27,12 @@ class GraphBuilder:
         """
         It sets up the graph for the selected use case. 
         """
-        if usecase == "Basic chatbot":
+        if usecase == "Basic Chatbot":
             self.basic_chatbot_build_graph()
+            
+        else:
+            raise ValueError(f"Unknown usecase: {usecase}")
+            
+        return self.graph_builder.compile()
         
         
