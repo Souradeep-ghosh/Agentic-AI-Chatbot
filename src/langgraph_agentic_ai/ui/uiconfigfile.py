@@ -1,9 +1,14 @@
+import os
 from configparser import ConfigParser
 
-class config:
+class Config:
     def __init__(self, config_file="./src/langgraph_agentic_ai/ui/uiconfigfile.ini"):
-        self.config=ConfigParser()
-        sef.config.read(config_file)
+        # Build absolute path relative to this file's location
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        config_file = os.path.join(base_dir, "uiconfigfile.ini")
+        
+        self.config = ConfigParser()
+        self.config.read(config_file)
         
     def get_page_title(self):
         return self.config.get("DEFAULT", "PAGE_TITLE")      
