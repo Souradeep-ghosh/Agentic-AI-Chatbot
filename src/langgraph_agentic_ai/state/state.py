@@ -4,4 +4,4 @@ from typing import Annotated
 
 class State(TypedDict):
     """State is a TypedDict that defines the structure of the state object used in the agentic AI graph."""
-    message: Annotated[list, add_message]
+    messages: Annotated[list, add_message]
