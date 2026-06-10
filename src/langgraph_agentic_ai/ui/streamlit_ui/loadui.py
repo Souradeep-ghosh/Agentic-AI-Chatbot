@@ -34,12 +34,25 @@ class LoadStreamlitUI:
             self.user_controls['selected_usecase'] = st.selectbox("Select Use Case", usecase_options)
             
             # Adding Chatbot with tool using Tavily Web search tool
-            if self.user_controls["selected_usecase"]== "Chatbot with Web-Search":
+            if self.user_controls["selected_usecase"]== "Chatbot with Web-Search" or if self.user_controls["selected_usecase"] == "AI News" :
                 os.environ["TAVILY_API_KEY"]= self.user_controls["TAVILY_API_KEY"]= st.session_state["TAVILY_API_KEY"]= st.text_input("TAVILY_API_KEY", type="password")
                 
                 # Validating API Key
                 if not self.user_controls["TAVILY_API_KEY"]:
                     st.warning("🚩Please enter your Tavily API Key to proceed. Don't have? refer: https://app.tavily.com/home")
-                    
+            
+            # For AI News
+            if self.user_controls["selected_usecase"] == "AI News" :
+                st.subheader(" 📰AI News Explorer")
+                
+                with st.sidebar: 
+                    time_frame = st.selectbox(
+                        " 🗓️Select Time Frame",
+                        ["Daily", "Weekly", "Monthly"],
+                        index = 0
+                    )
+                # For fetching latest AI news, if this button is pressed 
+                if st.button(" Fetch Latest AI News", use_container_width = True):
+                    st.session_state.timeframe = time_frame
             
         return self.user_controls
