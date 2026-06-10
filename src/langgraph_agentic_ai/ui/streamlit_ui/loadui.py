@@ -35,7 +35,7 @@ class LoadStreamlitUI:
             
             # Adding Chatbot with tool using Tavily Web search tool
             if self.user_controls["selected_usecase"]== "Chatbot with Web-Search":
-                self.user_controls["TAVILY_API_KEY"]= st.session_state["TAVILY_API_KEY"]= st.text_input("TAVILY_API_KEY", type="password")
+                os.environ["TAVILY_API_KEY"]= self.user_controls["TAVILY_API_KEY"]= st.session_state["TAVILY_API_KEY"]= st.text_input("TAVILY_API_KEY", type="password")
                 
                 # Validating API Key
                 if not self.user_controls["TAVILY_API_KEY"]:

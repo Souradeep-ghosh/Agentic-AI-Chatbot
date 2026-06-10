@@ -1,7 +1,10 @@
 from langgraph.graph import StateGraph
-from src.langgraph_agentic_ai.state.state import State
+from langgraph.graph import MessagesState as State
 from langgraph.graph import START, END
 from src.langgraph_agentic_ai.nodes.basic_chatbot_node import BasicChatbotNode
+from src.langgraph_agentic_ai.tools.search_tool import get_tools, create_tool_node
+from langgraph.prebuilt import tools_condition, ToolNode
+from src.langgraph_agentic_ai.nodes.chatbot_with_tool_node import ChatbotWithToolNode
 
 class GraphBuilder: 
     def __init__(self, model):
@@ -23,13 +26,35 @@ class GraphBuilder:
         self.graph_builder.add_edge("Chatbot", END)
         
         
+    def chatbot_with_tools_build_graph(self):
+        # Defining the tool and tool node
+        tools = get_tools()
+        tool_node = create_tool_node(tools)
+        
+        # Defining the LLM
+        llm = self.llm
+        
+        # Defining the chatbot nodes
+        obj_chatbot_with_node = ChatbotWithToolNode(llm)
+        chatbot_node = obj_chatbot_with_node.create_chatbot(tools)
+        
+        # Adding nodes
+        self.graph_builder.add_node("Chatbot", chatbot_node)
+        self.graph_builder.add_node("tools", tool_node)
+        
+        # Defining direct and conditional edges
+        self.graph_builder.add_edge(START, "Chatbot")                        
+        self.graph_builder.add_conditional_edges("Chatbot", tools_condition) 
+        self.graph_builder.add_edge("tools", "Chatbot")                      
+        
     def setup_graph(self, usecase: str):
         """
         It sets up the graph for the selected use case. 
         """
         if usecase == "Basic Chatbot":
             self.basic_chatbot_build_graph()
-            
+        elif usecase == "Chatbot with Web-Search":
+            self.chatbot_with_tools_build_graph()
         else:
             raise ValueError(f"Unknown usecase: {usecase}")
             

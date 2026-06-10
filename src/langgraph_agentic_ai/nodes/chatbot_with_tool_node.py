@@ -1,20 +1,15 @@
 from langgraph.graph import MessagesState
 
-class BasicChatbotNode:
-    """Basic chatbot logic implementation"""
-    
+class ChatbotWithToolNode:
+    """
+    Chatbot logic enhanced with tool integration.
+    """
     def __init__(self, model):
         self.llm = model
         
-    def process(self, state: MessagesState) -> dict:
-        """
-        Processes the input state and generates a chatbot response.
-        """
-        return {"messages": [self.llm.invoke(state["messages"])]}
-    
     def create_chatbot(self, tools):
         """
-        Returns a chatbot node function with tool binding.
+        Binds tools to the LLM and returns a chatbot node function.
         """
         llm_with_tools = self.llm.bind_tools(tools)
         
