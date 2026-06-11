@@ -12,6 +12,12 @@ class LoadStreamlitUI:
         st.set_page_config(page_title= "🤖" + self.config.get_page_title(), layout= "wide")
         st.header("🤖 " + self.config.get_page_title())
         
+        # Initializing Fetch Button session state
+        st.session_state.timeframe = ''
+        st.session_state.IsFetchButtonClicked = False
+        
+        
+        
         with st.sidebar:
             # Getting options from config file
             llm_options = self.config.get_llm_options()
@@ -52,7 +58,8 @@ class LoadStreamlitUI:
                         index = 0
                     )
                 # For fetching latest AI news, if this button is pressed 
-                if st.button(" Fetch Latest AI News", use_container_width = True):
+                if st.button("🪢 Fetch Latest AI News", use_container_width = True):
+                    st.session_state.IsFetchButtonClicked = True
                     st.session_state.timeframe = time_frame
             
         return self.user_controls

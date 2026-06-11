@@ -17,8 +17,12 @@ def load_agentic_ai_app():
         st.error("Error: Failed to load user input from the UI. Please check your configuration and try again.")
         return
 
-    # Get user message
-    user_message = st.chat_input("Enter your message here: ")
+    # Text input user message
+    if st.session_state.IsFetchButtonClicked:
+        user_message = st.session_state.timeframe
+    else:
+        user_message = st.chat_input("Enter Your Message: ")
+        
     
     # For the front-end
     if user_message:
