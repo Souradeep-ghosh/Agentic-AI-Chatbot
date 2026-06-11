@@ -16,6 +16,11 @@
 </div>
 
 ---
+## 🚀 Live Demo
+
+👉 **[Try the Agentic Chatbot with AI News and Search Tool Live](https://agentic-ai-chatbot-cv5mgnbzlp4tcuxfzqmqjh.streamlit.app/)**
+
+---
 
 ## ✨ Features
 
