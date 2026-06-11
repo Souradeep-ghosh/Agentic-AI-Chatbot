@@ -77,3 +77,14 @@ class AINewsNode:
         state['summary'] = response.content
         self.state['summary'] = state['summary']
         return state
+    
+    # Saving the summarized result in a markdown file. 
+    def save_result(self,state):
+        frequency = self.state['frequency']
+        summary = self.state['summary']
+        filename = f"./AINews/{frequency}_summary.md"
+        with open(filename, 'w') as f:
+            f.write(f"# {frequency.capitalize()} AI News Summary\n\n")
+            f.write(summary)
+        self.state['filename'] = filename
+        return state
