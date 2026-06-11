@@ -1,1 +1,75 @@
+# Virtual Environment
 AgentChat/
+
+# Environment Variables - NEVER commit these
+.env
+.env.local
+.env.production
+
+# API Keys example file (keep this, it's safe)
+# .env.example  ← do NOT ignore this one
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+*.pyc
+
+# Distribution / Packaging
+dist/
+build/
+*.egg-info/
+*.egg
+wheels/
+
+# PyInstaller
+*.spec
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+*.cover
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*.ipynb
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm / JetBrains
+.idea/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Generated AI News files
+AINews/
+
+# Pinecone / Vector DB local cache
+.pinecone/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Misc
+*.tmp
+*.bak
+*.swp
+*.swo
