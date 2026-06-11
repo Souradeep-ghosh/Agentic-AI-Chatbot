@@ -5,6 +5,7 @@ from src.langgraph_agentic_ai.nodes.basic_chatbot_node import BasicChatbotNode
 from src.langgraph_agentic_ai.tools.search_tool import get_tools, create_tool_node
 from langgraph.prebuilt import tools_condition, ToolNode
 from src.langgraph_agentic_ai.nodes.chatbot_with_tool_node import ChatbotWithToolNode
+from src.langgraph_agentic_ai.nodes.ai_news_node import AINewsNode
 
 class GraphBuilder: 
     def __init__(self, model):
@@ -48,9 +49,12 @@ class GraphBuilder:
         self.graph_builder.add_edge("tools", "Chatbot")                      
         
     def ai_news_builder_graph(self):
-        self.graph_builder.add_node("fetch_news", "")
-        self.graph_builder.add_node("summarize_news", "")
-        self.graph_builder.add_node("save_result", "")
+        
+        ai_news_node = AINewsNode(self.llm)
+        
+        self.graph_builder.add_node("fetch_news", ai_news_node.fetch_news)
+        self.graph_builder.add_node("summarize_news", ai_news_node.summarize_news)
+        self.graph_builder.add_node("save_result", ai_news_node.save_result)
         
         self.graph_builder.set_entry_point("fetch_news") # set_entry_point is another way of creating edge . This function will just create additional edge from START to fetch_news.
         self.graph_builder.add_edge("fetch_news", "summarize_news")
@@ -66,6 +70,9 @@ class GraphBuilder:
             self.basic_chatbot_build_graph()
         elif usecase == "Chatbot with Web-Search":
             self.chatbot_with_tools_build_graph()
+        elif usecase == "AI News":
+            self.ai_news_builder_graph()
+            
         else:
             raise ValueError(f"Unknown usecase: {usecase}")
             
