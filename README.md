@@ -193,17 +193,47 @@ Agentic-AI-Chatbot/
 
 ---
 
+## ☁️ Deployment — Streamlit Cloud
+
+This app is deployed on **Streamlit Cloud**. You can deploy your own instance in minutes:
+
+**1. Fork this repository** on GitHub
+
+**2. Go to [share.streamlit.io](https://share.streamlit.io)** and sign in with GitHub
+
+**3. Click "New app"** and fill in:
+```
+Repository : Souradeep-ghosh/Agentic-AI-Chatbot
+Branch     : main
+Main file  : app.py
+```
+
+**4. Add your API keys under "Advanced settings → Secrets":**
+```toml
+GROQ_API_KEY = "your_groq_api_key_here"
+TAVILY_API_KEY = "your_tavily_api_key_here"
+```
+
+**5. Click Deploy** — your app will be live at:
+```
+https://<your-app-name>.streamlit.app
+```
+
+> 💡 Streamlit Cloud auto-redeploys every time you push to the `main` branch on GitHub.
+
+---
+
 ## 🗺️ Roadmap
 
 - [x] Basic Chatbot with Groq LLM
 - [x] Chatbot with Tavily Web Search
 - [x] AI News Summarizer (Daily / Weekly / Monthly)
+- [x] Deploy to Streamlit Cloud
 - [ ] RAG Chatbot with Pinecone vector store
 - [ ] Document Q&A (PDF / DOCX upload)
 - [ ] Multi-agent collaboration
 - [ ] Memory persistence across sessions
 - [ ] OpenAI model support
-- [ ] Deploy to Streamlit Cloud
 
 ---
 ## 👨‍💻 Author
